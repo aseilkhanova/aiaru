@@ -1,42 +1,37 @@
 # aiaru
-about amasing game 
-tic tac toe 
-import pygame
-import sys
+from numpy import *
+from sympy import *
+matrice = random.randint(0, 10, (2, 4))
+print(matrice)
+
+t = shape(matrice)
 
 
-def check_win(mas,sign):
-    zeroes = 0
-    for row in mas:
-        zeroes+= row.count(0)
-        if row.count(sign)==3:
-            return sign
-        for col in range(3):
-            if mas[0][col]==sign and mas[1][col]==sign and mas[2][col]==sign:
-                return sign
-        if mas[0][0] == sign and mas[1][1] == sign and mas[2][2] == sign:
-            return sign
-        if mas[0][2] == sign and mas[1][1] == sign and mas[2][0] == sign:
-            return sign
-        if zeroes==0:
-            return 'Piece'
-        return False
+def minor(matrice, row, col):
+    minor = []
+    for i in range(len(matrice)):
+        if i != row:
+            minor.append([])
+            for j in range(len(matrice)):
+                if j != col:
+                    minor[-1].append(matrice[i][j])
+    return minor
 
-pygame.init()
-size_block = 100
-margin = 15
-width = height = size_block * 3 + margin * 4
 
-size_window = (width, height)
-screen = pygame.display.set_mode(size_window)
-pygame.display.set_caption("tic tac toe")
+def determinant(matrice):
+    if t[0] != t[1]:
+        print("Error")
+    if len(matrice) == 1:
+        return matrice[0][0]
+    if len(matrice) == 2:
+        return matrice[0][0] * matrice[1][1] - matrice[0][1] * matrice[1][0]
+    else:
+        det = 0
+        for i in range(len(matrice)):
+            det += (-1) ** i * matrice[0][i] * \
+                determinant(minor(matrice, 0, i))
+        return det
 
-black = (0, 0, 0)
-red = (255, 0, 0)
-green = (0, 255, 0)
-white = (255, 255, 255)
-mas = [[0]*3 for i in range(3)]
-query = 0 # 1 2 3 4 5 6 7
-game_over = False
 
+print(determinant(matrice))
 
