@@ -7,18 +7,18 @@ print(matrice)
 t = shape(matrice)
 
 
-def minor(matrice, row, col):
-    minor = []
+def min(matrice, row, col):
+    min = []
     for i in range(len(matrice)):
         if i != row:
             minor.append([])
             for j in range(len(matrice)):
                 if j != col:
                     minor[-1].append(matrice[i][j])
-    return minor
+    return min
 
 
-def determinant(matrice):
+def det(matrice):
     if t[0] != t[1]:
         print("Error")
     if len(matrice) == 1:
@@ -29,9 +29,9 @@ def determinant(matrice):
         det = 0
         for i in range(len(matrice)):
             det += (-1) ** i * matrice[0][i] * \
-                determinant(minor(matrice, 0, i))
+                det(minor(matrice, 0, i))
         return det
 
 
-print(determinant(matrice))
+print(det(matrice))
 
