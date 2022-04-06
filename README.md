@@ -1,7 +1,6 @@
 # aiaru
 about amasing game 
-tic 
-tac toe 
+tic tac toe 
 import pygame
 import sys
 
